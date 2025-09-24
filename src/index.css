@@ -2,41 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* SurakshaNet Ocean-Inspired Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Ocean Theme - Deep Blues to Teals */
+    --background: 220 43% 11%;
+    --foreground: 180 100% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 43% 11%;
+    --card-foreground: 180 100% 95%;
+    --card-glass: 220 43% 11% / 0.8;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 43% 11%;
+    --popover-foreground: 180 100% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 174 100% 35%;
+    --primary-foreground: 220 43% 11%;
+    --primary-glow: 174 100% 50%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 205 100% 25%;
+    --secondary-foreground: 180 100% 95%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 20% 20%;
+    --muted-foreground: 180 20% 70%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 180 100% 50%;
+    --accent-foreground: 220 43% 11%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 180 100% 95%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 20% 25%;
+    --input: 220 20% 20%;
+    --ring: 174 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
+
+    /* Ocean Gradients */
+    --gradient-ocean: linear-gradient(135deg, hsl(220 43% 11%), hsl(205 100% 25%), hsl(174 100% 35%));
+    --gradient-wave: linear-gradient(90deg, hsl(174 100% 35%), hsl(180 100% 50%), hsl(174 100% 35%));
+    --gradient-glass: linear-gradient(135deg, hsl(220 43% 11% / 0.4), hsl(180 100% 50% / 0.1));
+    
+    /* Ocean Shadows & Effects */
+    --shadow-ocean: 0 20px 40px -12px hsl(174 100% 35% / 0.3);
+    --shadow-glass: 0 8px 32px 0 hsl(220 43% 11% / 0.37);
+    --glow-primary: 0 0 30px hsl(174 100% 50% / 0.5);
+    --glow-accent: 0 0 20px hsl(180 100% 50% / 0.4);
+
+    /* Ocean Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-wave: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +117,59 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-ocean);
+    background-attachment: fixed;
+  }
+}
+
+/* Ocean Animations & Effects */
+@keyframes wave {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: var(--glow-primary); }
+  50% { box-shadow: var(--glow-accent); }
+}
+
+@keyframes ripple {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+/* Ocean Utility Classes */
+@layer components {
+  .glass-card {
+    @apply backdrop-blur-xl border border-white/20;
+    background: var(--gradient-glass);
+    box-shadow: var(--shadow-glass);
+  }
+  
+  .ocean-glow {
+    box-shadow: var(--glow-primary);
+    transition: var(--transition-smooth);
+  }
+  
+  .ocean-glow:hover {
+    box-shadow: var(--glow-accent);
+    transform: translateY(-2px);
+  }
+  
+  .wave-animation {
+    animation: wave 3s ease-in-out infinite;
+  }
+  
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .pulse-glow-animation {
+    animation: pulse-glow 2s ease-in-out infinite;
   }
 }
